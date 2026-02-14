@@ -1,13 +1,77 @@
+/* ===================================================================
+   Light theme (default)
+   =================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #e8e8e4;
+  --surface: #f0efeb;
+  --text: #2c2c2c;
+  --text-secondary: #5a5a5a;
+  --text-tertiary: #8a8a8a;
+  --border: #d2d0cb;
+  --accent: #0055d4;
+  --accent-hover: #003fa3;
+  --accent-subtle: rgba(0, 85, 212, 0.07);
+  --danger: #c0392b;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --nav-height: 56px;
+
+  color-scheme: light;
 }
 
+/* ===================================================================
+   Dark theme — explicit toggle
+   =================================================================== */
+
+html[data-theme="dark"] {
+  --bg: #1b1b1f;
+  --surface: #252529;
+  --text: #dcdcdc;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #6e6e6e;
+  --border: #353538;
+  --accent: #5aa3ff;
+  --accent-hover: #82bcff;
+  --accent-subtle: rgba(90, 163, 255, 0.1);
+  --danger: #e74c3c;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+  color-scheme: dark;
+}
+
+/* ===================================================================
+   Dark theme — system preference fallback (no JS / no stored pref)
+   =================================================================== */
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html:not([data-theme]) {
+    --bg: #1b1b1f;
+    --surface: #252529;
+    --text: #dcdcdc;
+    --text-secondary: #a0a0a0;
+    --text-tertiary: #6e6e6e;
+    --border: #353538;
+    --accent: #5aa3ff;
+    --accent-hover: #82bcff;
+    --accent-subtle: rgba(90, 163, 255, 0.1);
+    --danger: #e74c3c;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+    color-scheme: dark;
   }
+}
+
+/* ===================================================================
+   Base reset
+   =================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -17,26 +81,85 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  line-height: 1.5;
 }
 
 a {
-  color: inherit;
+  color: var(--accent);
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===================================================================
+   Top nav
+   =================================================================== */
+
+.topNav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.topNav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.topNav a:hover {
+  text-decoration: none;
+}
+
+.navBrand {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Theme toggle button */
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.themeToggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }

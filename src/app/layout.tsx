@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NewsFlash",
-  description: "Aggregated RSS news feed with practice mode",
+  title: "The Commute",
+  description: "5 ",
 };
 
 /**
@@ -52,7 +52,7 @@ export default function RootLayout({
         <nav className="topNav">
           <Link href="/" className="navBrand">
             <span className="navDot" />
-            NewsFlash
+            The Commute
           </Link>
           <ThemeToggle />
         </nav>
